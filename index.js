@@ -25,6 +25,10 @@ mongoose.connect(dbUrl, {
 const connection = mongoose.connection;
 connection.once("open", () => console.log("Povezan na MongoDB bazu!"));
 
+app.get("/", (req, res) => {
+  res.status(200).send({ message: "Povezan" });
+});
+
 // app.get("/home", (req, res) => {
 //   res.render("home", { user: req.user });
 // });
