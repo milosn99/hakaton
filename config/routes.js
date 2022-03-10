@@ -9,24 +9,24 @@ require("../config/passport-config");
 module.exports = function (app) {
   app.use(express.json());
 
-  app.use(cors({origin:true,credentials:true}));
+  app.use(cors({ origin: true, credentials: true }));
   app.use("/images", express.static(path.join("./", "/resources/images")));
 
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-    );
-    res.setHeader(
-      "Access-Control-Allow-Methods",
-      "GET, POST, PUT, PATCH, DELETE, OPTIONS"
-    );
-    next();
-  });
+  // app.use((req, res, next) => {
+  //   res.setHeader("Access-Control-Allow-Origin", "*");
+  //   res.setHeader(
+  //     "Access-Control-Allow-Headers",
+  //     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  //   );
+  //   res.setHeader(
+  //     "Access-Control-Allow-Methods",
+  //     "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+  //   );
+  //   next();
+  // });
 
   app.use("/api/users", users);
   app.use("/auth/google", google);
