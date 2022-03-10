@@ -8,7 +8,8 @@ require("../config/passport-config");
 
 module.exports = function (app) {
   app.use(express.json());
-  app.use(cors());
+
+  app.use(cors({origin:true,credentials:true}));
   app.use("/images", express.static(path.join("./", "/resources/images")));
 
   app.use(passport.initialize());
