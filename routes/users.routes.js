@@ -4,6 +4,7 @@ const jsonwebtoken = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../models/user.model");
 const multer = require("../middlewares/multer");
+const nodemailer = require("nodemailer");
 
 router.post("/register", multer, async (req, res, next) => {
   try {
@@ -48,6 +49,30 @@ router.post("/", async (req, res, next) => {
       token: token,
     });
   }
+});
+
+router.post("/mail", async (req, res, next) => {
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.USER,
+      pass: process.env.PASS,
+    },
+  });
+
+  let mailOptions = {
+    from: process.env.USER,
+    to: req.body.email,
+    subject: "Dobrodosli",
+    text: req.body.text,
+  };
+
+  await transporter.sendMail(mailOptions, (err, data) => {
+    if (err) {
+      return res.status(500).send("Can't send email");
+    }
+    return res.status(200).send("Email sent successfully");
+  });
 });
 
 module.exports = router;
