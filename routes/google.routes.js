@@ -14,9 +14,15 @@ const User = require("../models/user.model");
 
 router.get(
   "/",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
-  })
+  passport.authenticate(
+    "google",
+    {
+      scope: ["profile", "email"],
+    },
+    (req, res) => {
+      res.send(req);
+    }
+  )
 );
 
 router.get("/callback", passport.authenticate("google"), async (req, res) => {
