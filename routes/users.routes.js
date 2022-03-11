@@ -65,6 +65,13 @@ router.post("/mail", async (req, res, next) => {
     to: req.body.email,
     subject: "Dobrodosli",
     text: req.body.text,
+    // attachments: [
+    //   {
+    //     filename: "package.json",
+    //     path:
+    //       "https://raw.githubusercontent.com/milosn99/hakaton/master/package.json",
+    //   },
+    // ],
   };
 
   await transporter.sendMail(mailOptions, (err, data) => {

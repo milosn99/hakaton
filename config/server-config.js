@@ -4,7 +4,7 @@ const path = require("path");
 const passport = require("passport");
 const users = require("../routes/users.routes");
 const google = require("../routes/google.routes");
-require("../config/passport-config");
+require("./passport-config");
 
 module.exports = function (app) {
   app.use(express.json());
